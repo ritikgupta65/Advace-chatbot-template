@@ -72,6 +72,11 @@ const ChatInterface = () => {
     setChatState('welcome');
   };
 
+  const startNewChat = () => {
+    setMessages([]);
+    setIsLoading(false);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <div className="flex-1 flex flex-col">
@@ -83,6 +88,7 @@ const ChatInterface = () => {
             isLoading={isLoading}
             onSendMessage={handleSendMessage}
             onGoHome={goHome}
+            onNewChat={startNewChat}
           />
         )}
       </div>

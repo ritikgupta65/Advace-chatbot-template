@@ -1,7 +1,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
-import { ArrowLeft, MessageCircle } from 'lucide-react';
+import { ArrowLeft, MessageCircle, Plus } from 'lucide-react';
 import { Message } from '@/types/chat';
 import MessageBubble from './MessageBubble';
 import LoadingAnimation from './LoadingAnimation';
@@ -12,13 +12,15 @@ interface ChatWindowProps {
   isLoading: boolean;
   onSendMessage: (message: string) => void;
   onGoHome: () => void;
+  onNewChat: () => void;
 }
 
 const ChatWindow: React.FC<ChatWindowProps> = ({ 
   messages, 
   isLoading, 
   onSendMessage, 
-  onGoHome 
+  onGoHome,
+  onNewChat
 }) => {
   const { theme } = useTheme();
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -35,31 +37,42 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
     <div className="flex-1 flex flex-col max-h-screen">
       {/* Header */}
       <div className="bg-white/10 backdrop-blur-md border-b border-white/20 p-4">
-        <div className="flex items-center">
-          <button
-            onClick={onGoHome}
-            className="p-2 rounded-full hover:bg-white/20 transition-colors mr-3"
-          >
-            <ArrowLeft className="w-5 h-5 text-white" />
-          </button>
-          
+        <div className="flex items-center justify-between">
           <div className="flex items-center">
-            {theme.logoUrl ? (
-              <img 
-                src={theme.logoUrl} 
-                alt={theme.brandName}
-                className="w-10 h-10 rounded-full mr-3"
-              />
-            ) : (
-              <div className={`w-10 h-10 rounded-full bg-gradient-to-r ${theme.primaryGradient} flex items-center justify-center mr-3`}>
-                <MessageCircle className="w-5 h-5 text-white" />
+            <button
+              onClick={onGoHome}
+              className="p-2 rounded-full hover:bg-white/20 transition-colors mr-3"
+            >
+              <ArrowLeft className="w-5 h-5 text-white" />
+            </button>
+            
+            <div className="flex items-center">
+              {theme.logoUrl ? (
+                <img 
+                  src={theme.logoUrl} 
+                  alt={theme.brandName}
+                  className="w-10 h-10 rounded-full mr-3"
+                />
+              ) : (
+                <div className={`w-10 h-10 rounded-full bg-gradient-to-r ${theme.primaryGradient} flex items-center justify-center mr-3`}>
+                  <MessageCircle className="w-5 h-5 text-white" />
+                </div>
+              )}
+              <div>
+                <h2 className="text-white font-semibold">{theme.brandName}</h2>
+                <p className="text-gray-300 text-sm">Online</p>
               </div>
-            )}
-            <div>
-              <h2 className="text-white font-semibold">{theme.brandName}</h2>
-              <p className="text-gray-300 text-sm">Online</p>
             </div>
           </div>
+
+          {/* New Chat Button */}
+          <button
+            onClick={onNewChat}
+            className="flex items-center px-3 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors text-white text-sm"
+          >
+            <Plus className="w-4 h-4 mr-2" />
+            New Chat
+          </button>
         </div>
       </div>
 

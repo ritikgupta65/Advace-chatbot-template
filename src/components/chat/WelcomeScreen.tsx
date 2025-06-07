@@ -100,10 +100,9 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStartChat }) => {
           </div>
         )}
 
-        {/* Additional Actions */}
+        {/* Additional Actions - UI only, no backend functionality */}
         <div className="space-y-3">
           <button
-            onClick={() => onStartChat('I would like to start a live call')}
             className="w-full p-4 bg-black/30 backdrop-blur-md rounded-2xl border border-white/20 text-white hover:bg-black/40 transition-all duration-300 group flex items-center justify-between"
           >
             <div className="flex items-center">
@@ -114,7 +113,6 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStartChat }) => {
           </button>
 
           <button
-            onClick={() => onStartChat('I would like to talk to a human agent')}
             className="w-full p-4 bg-black/30 backdrop-blur-md rounded-2xl border border-white/20 text-white hover:bg-black/40 transition-all duration-300 group flex items-center justify-between"
           >
             <div className="flex items-center">
