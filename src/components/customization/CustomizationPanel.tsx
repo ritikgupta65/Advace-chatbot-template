@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { X, Download, Upload, RotateCcw, Palette, Image, Type, MessageSquare } from 'lucide-react';
@@ -130,6 +129,9 @@ const CustomizationPanel: React.FC<CustomizationPanelProps> = ({ onClose }) => {
                     </button>
                   )}
                 </div>
+                <p className="text-gray-400 text-sm mt-2">
+                  Upload your logo as PNG, JPG, or SVG. Recommended size: 64x64px
+                </p>
               </div>
 
               {/* Brand Name */}

@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 interface ThemeConfig {
@@ -20,13 +19,13 @@ interface ThemeContextType {
 }
 
 const defaultTheme: ThemeConfig = {
-  primaryGradient: 'from-emerald-600 to-lime-500',
+  primaryGradient: 'from-emerald-500 to-lime-400',
   secondaryGradient: 'from-emerald-800 to-emerald-600',
   accentColor: 'emerald-400',
   logoUrl: '',
   brandName: 'AI Assistant',
-  welcomeMessage: 'Hello! How can I help you today?',
-  quickActions: ['Ask a question', 'Track my order', 'Get support', 'View FAQ']
+  welcomeMessage: 'How can we help you today?',
+  quickActions: ['Ask a question', 'Track my order', 'New arrivals', 'Get support']
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
