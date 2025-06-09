@@ -78,10 +78,12 @@ const ChatInterface = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <div className="flex-1 flex flex-col">
+    <div className="h-screen flex flex-col">
+      <div className="flex-1 overflow-hidden">
         {chatState === 'welcome' ? (
-          <WelcomeScreen onStartChat={startChat} />
+          <div className="h-full overflow-y-auto pb-20">
+            <WelcomeScreen onStartChat={startChat} />
+          </div>
         ) : (
           <ChatWindow 
             messages={messages} 
