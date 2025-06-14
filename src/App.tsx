@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+// import VapiWidget from '@/components/chat/VapiWidget'; // Adjust path based on where you save the component
+
 
 const queryClient = new QueryClient();
 
@@ -23,5 +25,6 @@ const App = () => (
     </TooltipProvider>
   </QueryClientProvider>
 );
+
 
 export default App;

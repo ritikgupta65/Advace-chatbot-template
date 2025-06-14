@@ -1,4 +1,3 @@
-
 import { useTheme } from '@/contexts/ThemeContext';
 import { Message } from '@/types/chat';
 import { User, MessageCircle } from 'lucide-react';
@@ -8,8 +7,19 @@ interface MessageBubbleProps {
 }
 
 const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
-  const { theme } = useTheme();
+  const { theme } = useTheme(); 
   const isUser = message.sender === 'user';
+
+  // Format message: *bold*, **bold**, \n -> <br />, <strong>
+  const formatMessage = (text: string) => {
+    return text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // **bold**
+      .replace(/\*(.*?)\*/g, '<strong>$1</strong>')     // *bold*
+      .replace(/\n/g, '<br/>')  
+        
+    .replace(/\*(?!\*)(.*?)\*/g, '• $1') ;             // *item* → • item
+                         // newline
+  };
 
   return (
     <div className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-4`}>
@@ -37,8 +47,11 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
             ? `bg-gradient-to-r ${theme.primaryGradient} text-white ml-auto`
             : 'bg-white/10 backdrop-blur-md border border-white/20 text-white'
         } shadow-xl`}>
-          <p className="text-sm leading-relaxed">{message.content}</p>
-          
+          <p
+            className="text-sm leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: formatMessage(message.content) }}
+          />
+
           {/* Timestamp */}
           <p className={`text-xs mt-1 ${
             isUser ? 'text-white/70' : 'text-gray-400'

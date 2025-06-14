@@ -1,14 +1,19 @@
-
 import { useState, useEffect } from 'react';
 import WelcomeScreen from './WelcomeScreen';
 import ChatWindow from './ChatWindow';
 import NavigationBar from './NavigationBar';
 import { Message, ChatState } from '@/types/chat';
+import { useVapi } from '@/hooks/useVapi';
 
 const ChatInterface = () => {
   const [chatState, setChatState] = useState<ChatState>('welcome');
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  // VAPI integration
+  const apiKey = '4990af9d-ee12-4591-a103-2810f3d78126';
+  const assistantId = 'ea3b9464-bb40-43ec-a4d0-6c9728923143';
+  const { isConnected, isSpeaking, startCall, stopCall, transcript } = useVapi(apiKey, assistantId);
 
   const startChat = (initialMessage?: string) => {
     setChatState('chatting');
@@ -22,15 +27,14 @@ const ChatInterface = () => {
       id: Date.now().toString(),
       content,
       sender: 'user',
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setIsLoading(true);
 
     try {
-      // N8N Webhook Integration
-      const response = await fetch(process.env.REACT_APP_N8N_WEBHOOK_URL || '/api/chat', {
+      const response = await fetch('http://localhost:5678/webhook/5165540a-b829-4b9c-bac4-ce5a0ffe9aed', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,26 +47,26 @@ const ChatInterface = () => {
       }
 
       const data = await response.json();
-      
+
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: data.response || 'I apologize, but I encountered an error processing your request.',
+        content: data.reply || 'Sorry, I couldn’t understand that.',
         sender: 'bot',
-        timestamp: new Date()
+        timestamp: new Date(),
       };
 
-      setMessages(prev => [...prev, botMessage]);
+      setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
       console.error('Error sending message:', error);
-      
+
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: 'I apologize, but I\'m having trouble connecting right now. Please try again in a moment.',
+        content: 'Oops! Something went wrong. Try again later.',
         sender: 'bot',
-        timestamp: new Date()
+        timestamp: new Date(),
       };
 
-      setMessages(prev => [...prev, errorMessage]);
+      setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
     }
@@ -85,12 +89,16 @@ const ChatInterface = () => {
             <WelcomeScreen onStartChat={startChat} />
           </div>
         ) : (
-          <ChatWindow 
-            messages={messages} 
+          <ChatWindow
+            messages={messages}
             isLoading={isLoading}
             onSendMessage={handleSendMessage}
             onGoHome={goHome}
             onNewChat={startNewChat}
+            isConnected={isConnected}
+            transcript={transcript}
+            startCall={startCall}
+            stopCall={stopCall}
           />
         )}
       </div>

@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { ArrowLeft, MessageCircle, Plus } from 'lucide-react';
@@ -13,14 +12,22 @@ interface ChatWindowProps {
   onSendMessage: (message: string) => void;
   onGoHome: () => void;
   onNewChat: () => void;
+  isConnected: boolean;
+  transcript: { role: string; text: string }[];
+  startCall: () => void;
+  stopCall: () => void;
 }
 
-const ChatWindow: React.FC<ChatWindowProps> = ({ 
-  messages, 
-  isLoading, 
-  onSendMessage, 
+const ChatWindow: React.FC<ChatWindowProps> = ({
+  messages,
+  isLoading,
+  onSendMessage,
   onGoHome,
-  onNewChat
+  onNewChat,
+  isConnected,
+  transcript,
+  startCall,
+  stopCall,
 }) => {
   const { theme } = useTheme();
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -31,7 +38,15 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, isLoading]);
+  }, [messages, isLoading, transcript]);
+
+  // Convert transcript to Message objects for MessageBubble
+  const transcriptMessages: Message[] = transcript.map((msg, index) => ({
+    id: `transcript-${index}`,
+    content: msg.text,
+    sender: msg.role === 'user' ? 'user' : 'bot',
+    timestamp: new Date(),
+  }));
 
   return (
     <div className="h-screen flex flex-col">
@@ -45,16 +60,18 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
             >
               <ArrowLeft className="w-5 h-5 text-white" />
             </button>
-            
+
             <div className="flex items-center">
               {theme.logoUrl ? (
-                <img 
-                  src={theme.logoUrl} 
+                <img
+                  src={theme.logoUrl}
                   alt={theme.brandName}
                   className="w-10 h-10 rounded-full mr-3"
                 />
               ) : (
-                <div className={`w-10 h-10 rounded-full bg-gradient-to-r ${theme.primaryGradient} flex items-center justify-center mr-3`}>
+                <div
+                  className={`w-10 h-10 rounded-full bg-gradient-to-r ${theme.primaryGradient} flex items-center justify-center mr-3`}
+                >
                   <MessageCircle className="w-5 h-5 text-white" />
                 </div>
               )}
@@ -78,16 +95,18 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
 
       {/* Messages Area - Scrollable */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        {messages.length === 0 ? (
+        {messages.length === 0 && transcript.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
-            <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${theme.primaryGradient} flex items-center justify-center mb-4`}>
+            <div
+              className={`w-16 h-16 rounded-full bg-gradient-to-r ${theme.primaryGradient} flex items-center justify-center mb-4`}
+            >
               <MessageCircle className="w-8 h-8 text-white" />
             </div>
             <p className="text-gray-400">Start a conversation by typing a message below</p>
           </div>
         ) : (
           <>
-            {messages.map((message) => (
+            {[...messages, ...transcriptMessages].map((message) => (
               <MessageBubble key={message.id} message={message} />
             ))}
             {isLoading && <LoadingAnimation />}
@@ -98,7 +117,13 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
 
       {/* Message Input - Fixed at bottom */}
       <div className="flex-shrink-0 pb-20">
-        <MessageInput onSendMessage={onSendMessage} disabled={isLoading} />
+        <MessageInput
+          onSendMessage={onSendMessage}
+          disabled={isLoading}
+          isConnected={isConnected}
+          startCall={startCall}
+          stopCall={stopCall}
+        />
       </div>
     </div>
   );
