@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { ArrowLeft, MessageCircle, Plus } from 'lucide-react';
 import { Message } from '@/types/chat';
@@ -13,7 +13,7 @@ interface ChatWindowProps {
   onGoHome: () => void;
   onNewChat: () => void;
   isConnected: boolean;
-  transcript: { role: string; text: string }[];
+  transcript: { role: string; text: string; timestamp: number }[];
   startCall: () => void;
   stopCall: () => void;
 }
@@ -40,13 +40,18 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
     scrollToBottom();
   }, [messages, isLoading, transcript]);
 
-  // Convert transcript to Message objects for MessageBubble
+  // Convert transcript to Message objects using provided timestamps
   const transcriptMessages: Message[] = transcript.map((msg, index) => ({
     id: `transcript-${index}`,
     content: msg.text,
     sender: msg.role === 'user' ? 'user' : 'bot',
-    timestamp: new Date(),
+    timestamp: new Date(msg.timestamp),
   }));
+
+  // Combine and sort messages by timestamp
+  const allMessages: Message[] = [...messages, ...transcriptMessages].sort(
+    (a, b) => a.timestamp.getTime() - b.timestamp.getTime()
+  );
 
   return (
     <div className="h-screen flex flex-col">
@@ -95,7 +100,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
 
       {/* Messages Area - Scrollable */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        {messages.length === 0 && transcript.length === 0 ? (
+        {allMessages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <div
               className={`w-16 h-16 rounded-full bg-gradient-to-r ${theme.primaryGradient} flex items-center justify-center mb-4`}
@@ -106,7 +111,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
           </div>
         ) : (
           <>
-            {[...messages, ...transcriptMessages].map((message) => (
+            {allMessages.map((message) => (
               <MessageBubble key={message.id} message={message} />
             ))}
             {isLoading && <LoadingAnimation />}

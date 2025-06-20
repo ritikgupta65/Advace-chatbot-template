@@ -5,7 +5,7 @@ export const useVapi = (apiKey: string, assistantId: string) => {
   const [vapi, setVapi] = useState<Vapi | null>(null);
   const [isConnected, setIsConnected] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [transcript, setTranscript] = useState<Array<{ role: string, text: string }>>([]);
+  const [transcript, setTranscript] = useState<Array<{ role: string; text: string; timestamp: number }>>([]);
 
   useEffect(() => {
     const vapiInstance = new Vapi(apiKey);
@@ -21,7 +21,11 @@ export const useVapi = (apiKey: string, assistantId: string) => {
 
     vapiInstance.on('message', (message) => {
       if (message.type === 'transcript') {
-        setTranscript(prev => [...prev, { role: message.role, text: message.transcript }]);
+        setTranscript(prev => [...prev, { 
+          role: message.role, 
+          text: message.transcript,
+          timestamp: Date.now() // Store timestamp when message is received
+        }]);
       }
     });
 
@@ -38,5 +42,9 @@ export const useVapi = (apiKey: string, assistantId: string) => {
     if (vapi) vapi.stop();
   };
 
-  return { isConnected, isSpeaking, transcript, startCall, stopCall };
+  const clearTranscript = () => {
+    setTranscript([]);
+  };
+
+  return { isConnected, isSpeaking, transcript, startCall, stopCall, clearTranscript };
 };

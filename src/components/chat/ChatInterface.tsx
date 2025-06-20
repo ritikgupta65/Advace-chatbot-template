@@ -13,7 +13,7 @@ const ChatInterface = () => {
   // VAPI integration
   const apiKey = '4990af9d-ee12-4591-a103-2810f3d78126';
   const assistantId = 'ea3b9464-bb40-43ec-a4d0-6c9728923143';
-  const { isConnected, isSpeaking, startCall, stopCall, transcript } = useVapi(apiKey, assistantId);
+  const { isConnected, isSpeaking, startCall, stopCall, transcript, clearTranscript } = useVapi(apiKey, assistantId);
 
   const startChat = (initialMessage?: string) => {
     setChatState('chatting');
@@ -78,6 +78,7 @@ const ChatInterface = () => {
 
   const startNewChat = () => {
     setMessages([]);
+    clearTranscript(); // Clear the transcript
     setIsLoading(false);
   };
 
