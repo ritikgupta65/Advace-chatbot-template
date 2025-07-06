@@ -1,3 +1,4 @@
+
 import { useRef, useEffect } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { ArrowLeft, MessageCircle, Plus } from 'lucide-react';
@@ -54,35 +55,25 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
   );
 
   return (
-    <div className="h-screen flex flex-col">
-      {/* Header */}
-      <div className="bg-white/10 backdrop-blur-md border-b border-white/20 p-4 flex-shrink-0">
+    <div className="h-full flex flex-col">
+      {/* Compact Header */}
+      <div className="bg-white/10 backdrop-blur-md border-b border-white/20 p-3 flex-shrink-0">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <button
               onClick={onGoHome}
-              className="p-2 rounded-full hover:bg-white/20 transition-colors mr-3"
+              className="p-1 rounded-full hover:bg-white/20 transition-colors mr-2"
             >
-              <ArrowLeft className="w-5 h-5 text-white" />
+              <ArrowLeft className="w-4 h-4 text-white" />
             </button>
 
             <div className="flex items-center">
-              {theme.logoUrl ? (
-                <img
-                  src={theme.logoUrl}
-                  alt={theme.brandName}
-                  className="w-10 h-10 rounded-full mr-3"
-                />
-              ) : (
-                <div
-                  className={`w-10 h-10 rounded-full bg-gradient-to-r ${theme.primaryGradient} flex items-center justify-center mr-3`}
-                >
-                  <MessageCircle className="w-5 h-5 text-white" />
-                </div>
-              )}
+              <div className="w-8 h-8 rounded-full bg-yellow-400 flex items-center justify-center mr-2">
+                <span className="text-black font-bold text-sm">W</span>
+              </div>
               <div>
-                <h2 className="text-white font-semibold">{theme.brandName}</h2>
-                <p className="text-gray-300 text-sm">Online</p>
+                <h2 className="text-white font-semibold text-sm">{theme.brandName}</h2>
+                <p className="text-gray-300 text-xs">Online</p>
               </div>
             </div>
           </div>
@@ -90,24 +81,22 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
           {/* New Chat Button */}
           <button
             onClick={onNewChat}
-            className="flex items-center px-3 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors text-white text-sm"
+            className="flex items-center px-2 py-1 bg-white/10 rounded-lg hover:bg-white/20 transition-colors text-white text-xs"
           >
-            <Plus className="w-4 h-4 mr-2" />
-            New Chat
+            <Plus className="w-3 h-3 mr-1" />
+            New
           </button>
         </div>
       </div>
 
       {/* Messages Area - Scrollable */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-3 space-y-3 scrollbar-hide">
         {allMessages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
-            <div
-              className={`w-16 h-16 rounded-full bg-gradient-to-r ${theme.primaryGradient} flex items-center justify-center mb-4`}
-            >
-              <MessageCircle className="w-8 h-8 text-white" />
+            <div className="w-12 h-12 rounded-full bg-yellow-400 flex items-center justify-center mb-3">
+              <span className="text-black font-bold">W</span>
             </div>
-            <p className="text-gray-400">Start a conversation by typing a message below</p>
+            <p className="text-gray-400 text-sm">Start a conversation by typing a message below</p>
           </div>
         ) : (
           <>
@@ -121,7 +110,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
       </div>
 
       {/* Message Input - Fixed at bottom */}
-      <div className="flex-shrink-0 pb-20">
+      <div className="flex-shrink-0 pb-16">
         <MessageInput
           onSendMessage={onSendMessage}
           disabled={isLoading}

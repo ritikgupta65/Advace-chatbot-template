@@ -1,5 +1,6 @@
+
 import { useState, useEffect } from 'react';
-import WelcomeScreen from './WelcomeScreen';
+import WelcomeScreenWidget from './WelcomeScreenWidget';
 import ChatWindow from './ChatWindow';
 import NavigationBar from './NavigationBar';
 import { Message, ChatState } from '@/types/chat';
@@ -50,7 +51,7 @@ const ChatInterface = () => {
 
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: data.reply || 'Sorry, I couldn’t understand that.',
+        content: data.reply || 'Sorry, I couldn\'t understand that.',
         sender: 'bot',
         timestamp: new Date(),
       };
@@ -78,16 +79,16 @@ const ChatInterface = () => {
 
   const startNewChat = () => {
     setMessages([]);
-    clearTranscript(); // Clear the transcript
+    clearTranscript();
     setIsLoading(false);
   };
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-full flex flex-col relative">
       <div className="flex-1 overflow-hidden">
         {chatState === 'welcome' ? (
-          <div className="h-full overflow-y-auto pb-20">
-            <WelcomeScreen onStartChat={startChat} />
+          <div className="h-full overflow-y-auto scrollbar-hide">
+            <WelcomeScreenWidget onStartChat={startChat} />
           </div>
         ) : (
           <ChatWindow
