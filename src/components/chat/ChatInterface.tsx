@@ -84,11 +84,17 @@ const ChatInterface = () => {
   };
 
   return (
-    <div className="h-full flex flex-col relative">
+    <div className="h-full flex flex-col">
       <div className="flex-1 overflow-hidden">
         {chatState === 'welcome' ? (
-          <div className="h-full overflow-y-auto scrollbar-hide">
-            <WelcomeScreenWidget onStartChat={startChat} />
+          <div className="h-full flex flex-col">
+            <div className="flex-1 overflow-y-auto scrollbar-hide">
+              <WelcomeScreenWidget onStartChat={startChat} />
+            </div>
+            {/* Navigation Bar only on welcome screen */}
+            <div className="flex-shrink-0">
+              <NavigationBar currentView={chatState} onNavigate={setChatState} />
+            </div>
           </div>
         ) : (
           <ChatWindow
@@ -103,11 +109,6 @@ const ChatInterface = () => {
             stopCall={stopCall}
           />
         )}
-      </div>
-      
-      {/* Navigation Bar inside the chatbot */}
-      <div className="flex-shrink-0">
-        <NavigationBar currentView={chatState} onNavigate={setChatState} />
       </div>
     </div>
   );
