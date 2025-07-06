@@ -56,24 +56,24 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
 
   return (
     <div className="h-full flex flex-col">
-      {/* Compact Header */}
-      <div className="bg-white/10 backdrop-blur-md border-b border-white/20 p-3 flex-shrink-0">
+      {/* Professional Header */}
+      <div className="bg-gray-900/50 backdrop-blur-sm border-b border-gray-700 p-3 flex-shrink-0">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <button
               onClick={onGoHome}
-              className="p-1 rounded-full hover:bg-white/20 transition-colors mr-2"
+              className="p-1.5 rounded-full hover:bg-gray-700/50 transition-colors mr-3"
             >
-              <ArrowLeft className="w-4 h-4 text-white" />
+              <ArrowLeft className="w-4 h-4 text-gray-300" />
             </button>
 
             <div className="flex items-center">
-              <div className="w-8 h-8 rounded-full bg-yellow-400 flex items-center justify-center mr-2">
+              <div className="w-8 h-8 rounded-full bg-yellow-400 flex items-center justify-center mr-3">
                 <span className="text-black font-bold text-sm">W</span>
               </div>
               <div>
-                <h2 className="text-white font-semibold text-sm">{theme.brandName}</h2>
-                <p className="text-gray-300 text-xs">Online</p>
+                <h2 className="text-white font-medium text-sm">{theme.brandName}</h2>
+                <p className="text-gray-400 text-xs">Online</p>
               </div>
             </div>
           </div>
@@ -81,7 +81,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
           {/* New Chat Button */}
           <button
             onClick={onNewChat}
-            className="flex items-center px-2 py-1 bg-white/10 rounded-lg hover:bg-white/20 transition-colors text-white text-xs"
+            className="flex items-center px-3 py-1.5 bg-transparent border border-gray-600 rounded-lg hover:border-gray-500 hover:bg-gray-800/30 transition-all duration-200 text-white text-xs"
           >
             <Plus className="w-3 h-3 mr-1" />
             New
