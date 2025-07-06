@@ -1,4 +1,3 @@
-
 import { useTheme } from '@/contexts/ThemeContext';
 import { Message } from '@/types/chat';
 import { User, MessageCircle } from 'lucide-react';
@@ -30,14 +29,14 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
           <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
             isUser 
               ? 'bg-white/20' 
-              : 'bg-yellow-400'
+              : `bg-gradient-to-r ${theme.primaryGradient}`
           }`}>
             {isUser ? (
               <User className="w-4 h-4 text-white" />
             ) : theme.logoUrl ? (
               <img src={theme.logoUrl} alt="Bot" className="w-8 h-8 rounded-full" />
             ) : (
-              <span className="text-black font-bold text-sm">W</span>
+              <MessageCircle className="w-4 h-4 text-white" />
             )}
           </div>
         </div>
@@ -45,7 +44,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
         {/* Message Bubble */}
         <div className={`relative p-3 rounded-2xl ${
           isUser
-            ? 'bg-green-600 text-white ml-auto'
+            ? `bg-gradient-to-r ${theme.primaryGradient} text-white ml-auto`
             : 'bg-white/10 backdrop-blur-md border border-white/20 text-white'
         } shadow-xl`}>
           <p
@@ -71,7 +70,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
           }`}>
             <div className={`w-3 h-3 rotate-45 ${
               isUser 
-                ? 'bg-green-600' 
+                ? `bg-gradient-to-r ${theme.primaryGradient}` 
                 : 'bg-white/10 border-l border-t border-white/20'
             }`}></div>
           </div>
