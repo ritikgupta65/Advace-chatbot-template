@@ -109,8 +109,8 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Message Input - Fixed at bottom */}
-      <div className="flex-shrink-0 pb-16">
+      {/* Message Input - Fixed at bottom, no extra padding */}
+      <div className="flex-shrink-0">
         <MessageInput
           onSendMessage={onSendMessage}
           disabled={isLoading}

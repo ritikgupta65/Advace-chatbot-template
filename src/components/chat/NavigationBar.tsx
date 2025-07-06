@@ -18,8 +18,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ currentView, onNavigate }
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-black/20 backdrop-blur-md border-t border-white/20 p-2 z-50">
-      <div className="flex justify-around max-w-md mx-auto">
+    <div className="bg-black/20 backdrop-blur-md border-t border-white/20 p-2">
+      <div className="flex justify-around">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = currentView === item.id;

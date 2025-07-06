@@ -29,14 +29,12 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
           <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
             isUser 
               ? 'bg-white/20' 
-              : `bg-gradient-to-r ${theme.primaryGradient}`
+              : 'bg-yellow-400'
           }`}>
             {isUser ? (
               <User className="w-4 h-4 text-white" />
-            ) : theme.logoUrl ? (
-              <img src={theme.logoUrl} alt="Bot" className="w-8 h-8 rounded-full" />
             ) : (
-              <MessageCircle className="w-4 h-4 text-white" />
+              <span className="text-black font-bold text-sm">W</span>
             )}
           </div>
         </div>

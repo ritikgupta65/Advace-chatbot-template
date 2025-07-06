@@ -104,7 +104,11 @@ const ChatInterface = () => {
           />
         )}
       </div>
-      <NavigationBar currentView={chatState} onNavigate={setChatState} />
+      
+      {/* Navigation Bar inside the chatbot */}
+      <div className="flex-shrink-0">
+        <NavigationBar currentView={chatState} onNavigate={setChatState} />
+      </div>
     </div>
   );
 };
