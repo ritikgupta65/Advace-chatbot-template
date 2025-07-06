@@ -2,10 +2,11 @@
 import { useRef, useEffect } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { ArrowLeft, MessageCircle, Plus } from 'lucide-react';
-import { Message } from '@/types/chat';
+import { Message, ChatState } from '@/types/chat';
 import MessageBubble from './MessageBubble';
 import LoadingAnimation from './LoadingAnimation';
 import MessageInput from './MessageInput';
+import NavigationBar from './NavigationBar';
 
 interface ChatWindowProps {
   messages: Message[];
@@ -17,6 +18,8 @@ interface ChatWindowProps {
   transcript: { role: string; text: string; timestamp: number }[];
   startCall: () => void;
   stopCall: () => void;
+  currentView: ChatState;
+  onNavigate: (view: ChatState) => void;
 }
 
 const ChatWindow: React.FC<ChatWindowProps> = ({
@@ -29,6 +32,8 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
   transcript,
   startCall,
   stopCall,
+  currentView,
+  onNavigate,
 }) => {
   const { theme } = useTheme();
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -57,14 +62,14 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
   return (
     <div className="h-full flex flex-col">
       {/* Professional Header */}
-      <div className="bg-gray-900/50 backdrop-blur-sm border-b border-gray-700 p-3 flex-shrink-0">
+      <div className="bg-black/20 backdrop-blur-sm border-b border-white/10 p-3 flex-shrink-0">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <button
               onClick={onGoHome}
-              className="p-1.5 rounded-full hover:bg-gray-700/50 transition-colors mr-3"
+              className="p-1.5 rounded-full hover:bg-white/10 transition-colors mr-3"
             >
-              <ArrowLeft className="w-4 h-4 text-gray-300" />
+              <ArrowLeft className="w-4 h-4 text-white" />
             </button>
 
             <div className="flex items-center">
@@ -73,7 +78,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
               </div>
               <div>
                 <h2 className="text-white font-medium text-sm">{theme.brandName}</h2>
-                <p className="text-gray-400 text-xs">Online</p>
+                <p className="text-green-200 text-xs">Online</p>
               </div>
             </div>
           </div>
@@ -81,7 +86,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
           {/* New Chat Button */}
           <button
             onClick={onNewChat}
-            className="flex items-center px-3 py-1.5 bg-transparent border border-gray-600 rounded-lg hover:border-gray-500 hover:bg-gray-800/30 transition-all duration-200 text-white text-xs"
+            className="flex items-center px-3 py-1.5 bg-transparent border border-white/20 rounded-lg hover:border-white/30 hover:bg-white/10 transition-all duration-200 text-white text-xs"
           >
             <Plus className="w-3 h-3 mr-1" />
             New
@@ -96,7 +101,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
             <div className="w-12 h-12 rounded-full bg-yellow-400 flex items-center justify-center mb-3">
               <span className="text-black font-bold">W</span>
             </div>
-            <p className="text-gray-400 text-sm">Start a conversation by typing a message below</p>
+            <p className="text-white/70 text-sm">Start a conversation by typing a message below</p>
           </div>
         ) : (
           <>
@@ -110,7 +115,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
       </div>
 
       {/* Message Input - Fixed at bottom */}
-      <div className="flex-shrink-0 pb-16">
+      <div className="flex-shrink-0">
         <MessageInput
           onSendMessage={onSendMessage}
           disabled={isLoading}
@@ -118,6 +123,11 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
           startCall={startCall}
           stopCall={stopCall}
         />
+      </div>
+
+      {/* Navigation Bar inside chat window */}
+      <div className="flex-shrink-0">
+        <NavigationBar currentView={currentView} onNavigate={onNavigate} />
       </div>
     </div>
   );
