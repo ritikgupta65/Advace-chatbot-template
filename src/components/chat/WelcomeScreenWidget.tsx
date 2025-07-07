@@ -30,7 +30,7 @@ const WelcomeScreenWidget: React.FC<WelcomeScreenWidgetProps> = ({ onStartChat }
         <div className="mb-4">
           <button
             onClick={() => onStartChat()}
-            className="w-full bg-transparent border border-gray-600 hover:border-gray-500 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-200 hover:bg-gray-800/30"
+            className="w-full bg-transparent border border-gray-600 hover:border-gray-400 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/30 hover:scale-[1.02] hover:shadow-lg"
           >
             <div className="flex items-center">
               <MessageCircle className="w-4 h-4 mr-3" />
@@ -44,13 +44,13 @@ const WelcomeScreenWidget: React.FC<WelcomeScreenWidgetProps> = ({ onStartChat }
         <div className="flex space-x-2 mb-6">
           <button 
             onClick={() => onStartChat('Track my order')}
-            className="flex-1 bg-transparent border border-gray-600 hover:border-gray-500 text-white text-xs py-2.5 px-3 rounded-lg transition-all duration-200 hover:bg-gray-800/30"
+            className="flex-1 bg-transparent border border-gray-600 hover:border-gray-400 text-white text-xs py-2.5 px-3 rounded-lg transition-all duration-300 hover:bg-gray-800/30 hover:scale-[1.02]"
           >
             Track my order
           </button>
           <button 
             onClick={() => onStartChat('Show me new arrivals')}
-            className="flex-1 bg-transparent border border-gray-600 hover:border-gray-500 text-white text-xs py-2.5 px-3 rounded-lg transition-all duration-200 hover:bg-gray-800/30"
+            className="flex-1 bg-transparent border border-gray-600 hover:border-gray-400 text-white text-xs py-2.5 px-3 rounded-lg transition-all duration-300 hover:bg-gray-800/30 hover:scale-[1.02]"
           >
             New arrivals
           </button>
@@ -59,7 +59,7 @@ const WelcomeScreenWidget: React.FC<WelcomeScreenWidgetProps> = ({ onStartChat }
         {/* Recent Conversation */}
         <div className="mb-6">
           <h3 className="text-white text-sm font-medium mb-3">Recent Conversation</h3>
-          <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-3 hover:bg-gray-800/70 transition-colors cursor-pointer">
+          <div className="bg-gray-800/50 border border-gray-700 hover:border-gray-500 rounded-lg p-3 hover:bg-gray-800/70 transition-all duration-300 cursor-pointer hover:scale-[1.01]">
             <div className="flex items-center justify-between">
               <div className="flex-1">
                 <p className="text-gray-300 text-xs mb-1">Hi, I am Wakao ai virtual assistant, ho...</p>
@@ -74,7 +74,7 @@ const WelcomeScreenWidget: React.FC<WelcomeScreenWidgetProps> = ({ onStartChat }
         <div className="space-y-3">
           <button
             onClick={() => onStartChat('Start a live call')}
-            className="w-full bg-transparent border border-gray-600 hover:border-gray-500 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-200 hover:bg-gray-800/30"
+            className="w-full bg-transparent border border-gray-600 hover:border-gray-400 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/30 hover:scale-[1.02] hover:shadow-lg"
           >
             <div className="flex items-center">
               <Phone className="w-4 h-4 mr-3" />
@@ -85,7 +85,7 @@ const WelcomeScreenWidget: React.FC<WelcomeScreenWidgetProps> = ({ onStartChat }
 
           <button
             onClick={() => onStartChat('Talk to a human agent')}
-            className="w-full bg-transparent border border-gray-600 hover:border-gray-500 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-200 hover:bg-gray-800/30"
+            className="w-full bg-transparent border border-gray-600 hover:border-gray-400 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/30 hover:scale-[1.02] hover:shadow-lg"
           >
             <div className="flex items-center">
               <User className="w-4 h-4 mr-3" />

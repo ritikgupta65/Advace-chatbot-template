@@ -28,10 +28,10 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ currentView, onNavigate }
             <button
               key={item.id}
               onClick={() => onNavigate(item.id)}
-              className={`flex flex-col items-center space-y-1 p-3 rounded-xl transition-all duration-300 min-w-[80px] ${
+              className={`flex flex-col items-center space-y-1 p-3 rounded-xl transition-all duration-300 min-w-[80px] hover:scale-105 ${
                 isActive 
-                  ? `bg-gradient-to-r ${theme.primaryGradient} text-white shadow-lg` 
-                  : 'text-gray-400 hover:text-white hover:bg-white/10'
+                  ? `bg-gradient-to-r ${theme.primaryGradient} text-white shadow-lg border border-white/30` 
+                  : 'text-gray-400 hover:text-white hover:bg-white/10 border border-transparent hover:border-white/20'
               }`}
             >
               <Icon className="w-5 h-5" />

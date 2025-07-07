@@ -62,7 +62,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
           <div className="flex items-center">
             <button
               onClick={onGoHome}
-              className="p-1.5 rounded-full hover:bg-gray-700/50 transition-colors mr-3"
+              className="p-1.5 rounded-full hover:bg-gray-700/50 border border-transparent hover:border-gray-600/50 transition-all duration-300 mr-3 hover:scale-110"
             >
               <ArrowLeft className="w-4 h-4 text-gray-300" />
             </button>
@@ -81,7 +81,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
           {/* New Chat Button */}
           <button
             onClick={onNewChat}
-            className="flex items-center px-3 py-1.5 bg-transparent border border-gray-600 rounded-lg hover:border-gray-500 hover:bg-gray-800/30 transition-all duration-200 text-white text-xs"
+            className="flex items-center px-3 py-1.5 bg-transparent border border-gray-600 hover:border-gray-500 rounded-lg hover:bg-gray-800/30 transition-all duration-300 text-white text-xs hover:scale-105"
           >
             <Plus className="w-3 h-3 mr-1" />
             New
