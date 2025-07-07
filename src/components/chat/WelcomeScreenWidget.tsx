@@ -9,27 +9,45 @@ interface WelcomeScreenWidgetProps {
 const WelcomeScreenWidget: React.FC<WelcomeScreenWidgetProps> = ({ onStartChat }) => {
   const { theme } = useTheme();
 
-  const handleRecentConversation = () => {
+  const handleRecentConversation = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('Recent conversation clicked');
     onStartChat('Continue recent conversation');
   };
 
-  const handleLiveCall = () => {
+  const handleLiveCall = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('Live call clicked');
     onStartChat('Start a live call');
   };
 
-  const handleHumanAgent = () => {
+  const handleHumanAgent = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('Human agent clicked');
     onStartChat('Talk to a human agent');
   };
 
-  const handleAskQuestion = () => {
+  const handleAskQuestion = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('Ask question clicked');
     onStartChat('Ask a question');
   };
 
-  const handleTrackOrder = () => {
+  const handleTrackOrder = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('Track order clicked');
     onStartChat('Track my order');
   };
 
-  const handleNewArrivals = () => {
+  const handleNewArrivals = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('New arrivals clicked');
     onStartChat('Show me new arrivals');
   };
 
@@ -54,10 +72,10 @@ const WelcomeScreenWidget: React.FC<WelcomeScreenWidgetProps> = ({ onStartChat }
         <div className="mb-4">
           <button
             onClick={handleAskQuestion}
-            className="w-full bg-transparent border border-gray-600/50 hover:border-white/60 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/40 hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400/50 group cursor-pointer active:scale-[0.98]"
+            className="w-full bg-transparent border border-gray-600/50 hover:border-white/60 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/40 hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400/50 group cursor-pointer active:scale-[0.98] select-none"
             type="button"
           >
-            <div className="flex items-center">
+            <div className="flex items-center pointer-events-none">
               <MessageCircle className="w-4 h-4 mr-3 transition-transform duration-300 group-hover:scale-110" />
               <span className="text-sm font-medium">Ask a question</span>
             </div>
@@ -69,14 +87,14 @@ const WelcomeScreenWidget: React.FC<WelcomeScreenWidgetProps> = ({ onStartChat }
         <div className="flex space-x-2 mb-6">
           <button 
             onClick={handleTrackOrder}
-            className="flex-1 bg-transparent border border-gray-600/50 hover:border-white/60 text-white text-xs py-2.5 px-3 rounded-lg transition-all duration-300 hover:bg-gray-800/40 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-gray-400/50 cursor-pointer active:scale-[0.98]"
+            className="flex-1 bg-transparent border border-gray-600/50 hover:border-white/60 text-white text-xs py-2.5 px-3 rounded-lg transition-all duration-300 hover:bg-gray-800/40 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-gray-400/50 cursor-pointer active:scale-[0.98] select-none"
             type="button"
           >
             Track my order
           </button>
           <button 
             onClick={handleNewArrivals}
-            className="flex-1 bg-transparent border border-gray-600/50 hover:border-white/60 text-white text-xs py-2.5 px-3 rounded-lg transition-all duration-300 hover:bg-gray-800/40 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-gray-400/50 cursor-pointer active:scale-[0.98]"
+            className="flex-1 bg-transparent border border-gray-600/50 hover:border-white/60 text-white text-xs py-2.5 px-3 rounded-lg transition-all duration-300 hover:bg-gray-800/40 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-gray-400/50 cursor-pointer active:scale-[0.98] select-none"
             type="button"
           >
             New arrivals
@@ -88,10 +106,10 @@ const WelcomeScreenWidget: React.FC<WelcomeScreenWidgetProps> = ({ onStartChat }
           <h3 className="text-white text-sm font-medium mb-3">Recent Conversation</h3>
           <button
             onClick={handleRecentConversation}
-            className="w-full bg-gray-800/30 border border-gray-600/50 hover:border-white/60 rounded-lg p-3 hover:bg-gray-800/50 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400/50 group cursor-pointer active:scale-[0.98]"
+            className="w-full bg-gray-800/30 border border-gray-600/50 hover:border-white/60 rounded-lg p-3 hover:bg-gray-800/50 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400/50 group cursor-pointer active:scale-[0.98] select-none"
             type="button"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between pointer-events-none">
               <div className="flex-1 text-left">
                 <p className="text-gray-300 text-xs mb-1">Hi, I am Wakao ai virtual assistant, ho...</p>
                 <p className="text-gray-500 text-xs">an hour ago</p>
@@ -105,10 +123,10 @@ const WelcomeScreenWidget: React.FC<WelcomeScreenWidgetProps> = ({ onStartChat }
         <div className="space-y-3">
           <button
             onClick={handleLiveCall}
-            className="w-full bg-transparent border border-gray-600/50 hover:border-white/60 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/40 hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400/50 group cursor-pointer active:scale-[0.98]"
+            className="w-full bg-transparent border border-gray-600/50 hover:border-white/60 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/40 hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400/50 group cursor-pointer active:scale-[0.98] select-none"
             type="button"
           >
-            <div className="flex items-center">
+            <div className="flex items-center pointer-events-none">
               <Phone className="w-4 h-4 mr-3 transition-transform duration-300 group-hover:scale-110" />
               <span className="text-sm font-medium">Start a live call</span>
             </div>
@@ -117,10 +135,10 @@ const WelcomeScreenWidget: React.FC<WelcomeScreenWidgetProps> = ({ onStartChat }
 
           <button
             onClick={handleHumanAgent}
-            className="w-full bg-transparent border border-gray-600/50 hover:border-white/60 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/40 hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400/50 group cursor-pointer active:scale-[0.98]"
+            className="w-full bg-transparent border border-gray-600/50 hover:border-white/60 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/40 hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400/50 group cursor-pointer active:scale-[0.98] select-none"
             type="button"
           >
-            <div className="flex items-center">
+            <div className="flex items-center pointer-events-none">
               <User className="w-4 h-4 mr-3 transition-transform duration-300 group-hover:scale-110" />
               <span className="text-sm font-medium">Talk to a human agent</span>
             </div>
