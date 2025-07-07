@@ -54,7 +54,8 @@ const WelcomeScreenWidget: React.FC<WelcomeScreenWidgetProps> = ({ onStartChat }
         <div className="mb-4">
           <button
             onClick={handleAskQuestion}
-            className="w-full bg-transparent border border-gray-600/50 hover:border-white/60 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/40 hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400/50 group cursor-pointer"
+            className="w-full bg-transparent border border-gray-600/50 hover:border-white/60 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/40 hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400/50 group cursor-pointer active:scale-[0.98]"
+            type="button"
           >
             <div className="flex items-center">
               <MessageCircle className="w-4 h-4 mr-3 transition-transform duration-300 group-hover:scale-110" />
@@ -68,13 +69,15 @@ const WelcomeScreenWidget: React.FC<WelcomeScreenWidgetProps> = ({ onStartChat }
         <div className="flex space-x-2 mb-6">
           <button 
             onClick={handleTrackOrder}
-            className="flex-1 bg-transparent border border-gray-600/50 hover:border-white/60 text-white text-xs py-2.5 px-3 rounded-lg transition-all duration-300 hover:bg-gray-800/40 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-gray-400/50 cursor-pointer"
+            className="flex-1 bg-transparent border border-gray-600/50 hover:border-white/60 text-white text-xs py-2.5 px-3 rounded-lg transition-all duration-300 hover:bg-gray-800/40 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-gray-400/50 cursor-pointer active:scale-[0.98]"
+            type="button"
           >
             Track my order
           </button>
           <button 
             onClick={handleNewArrivals}
-            className="flex-1 bg-transparent border border-gray-600/50 hover:border-white/60 text-white text-xs py-2.5 px-3 rounded-lg transition-all duration-300 hover:bg-gray-800/40 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-gray-400/50 cursor-pointer"
+            className="flex-1 bg-transparent border border-gray-600/50 hover:border-white/60 text-white text-xs py-2.5 px-3 rounded-lg transition-all duration-300 hover:bg-gray-800/40 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-gray-400/50 cursor-pointer active:scale-[0.98]"
+            type="button"
           >
             New arrivals
           </button>
@@ -85,7 +88,8 @@ const WelcomeScreenWidget: React.FC<WelcomeScreenWidgetProps> = ({ onStartChat }
           <h3 className="text-white text-sm font-medium mb-3">Recent Conversation</h3>
           <button
             onClick={handleRecentConversation}
-            className="w-full bg-gray-800/30 border border-gray-600/50 hover:border-white/60 rounded-lg p-3 hover:bg-gray-800/50 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400/50 group cursor-pointer"
+            className="w-full bg-gray-800/30 border border-gray-600/50 hover:border-white/60 rounded-lg p-3 hover:bg-gray-800/50 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400/50 group cursor-pointer active:scale-[0.98]"
+            type="button"
           >
             <div className="flex items-center justify-between">
               <div className="flex-1 text-left">
@@ -101,7 +105,8 @@ const WelcomeScreenWidget: React.FC<WelcomeScreenWidgetProps> = ({ onStartChat }
         <div className="space-y-3">
           <button
             onClick={handleLiveCall}
-            className="w-full bg-transparent border border-gray-600/50 hover:border-white/60 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/40 hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400/50 group cursor-pointer"
+            className="w-full bg-transparent border border-gray-600/50 hover:border-white/60 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/40 hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400/50 group cursor-pointer active:scale-[0.98]"
+            type="button"
           >
             <div className="flex items-center">
               <Phone className="w-4 h-4 mr-3 transition-transform duration-300 group-hover:scale-110" />
@@ -112,7 +117,8 @@ const WelcomeScreenWidget: React.FC<WelcomeScreenWidgetProps> = ({ onStartChat }
 
           <button
             onClick={handleHumanAgent}
-            className="w-full bg-transparent border border-gray-600/50 hover:border-white/60 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/40 hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400/50 group cursor-pointer"
+            className="w-full bg-transparent border border-gray-600/50 hover:border-white/60 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/40 hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400/50 group cursor-pointer active:scale-[0.98]"
+            type="button"
           >
             <div className="flex items-center">
               <User className="w-4 h-4 mr-3 transition-transform duration-300 group-hover:scale-110" />
