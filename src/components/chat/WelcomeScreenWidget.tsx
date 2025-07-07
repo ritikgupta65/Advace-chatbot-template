@@ -1,6 +1,6 @@
 
 import { useTheme } from '@/contexts/ThemeContext';
-import { MessageCircle, Phone, User } from 'lucide-react';
+import { MessageCircle, Phone, User, ArrowRight } from 'lucide-react';
 
 interface WelcomeScreenWidgetProps {
   onStartChat: (initialMessage?: string) => void;
@@ -8,6 +8,18 @@ interface WelcomeScreenWidgetProps {
 
 const WelcomeScreenWidget: React.FC<WelcomeScreenWidgetProps> = ({ onStartChat }) => {
   const { theme } = useTheme();
+
+  const handleRecentConversation = () => {
+    onStartChat('Continue recent conversation');
+  };
+
+  const handleLiveCall = () => {
+    onStartChat('Start a live call');
+  };
+
+  const handleHumanAgent = () => {
+    onStartChat('Talk to a human agent');
+  };
 
   return (
     <div className="h-full flex flex-col">
@@ -30,13 +42,13 @@ const WelcomeScreenWidget: React.FC<WelcomeScreenWidgetProps> = ({ onStartChat }
         <div className="mb-4">
           <button
             onClick={() => onStartChat()}
-            className="w-full bg-transparent border border-gray-600 hover:border-gray-400 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/30 hover:scale-[1.02] hover:shadow-lg"
+            className="w-full bg-transparent border border-gray-600 hover:border-gray-400 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/30 hover:scale-[1.02] hover:shadow-lg hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-gray-400/50"
           >
             <div className="flex items-center">
-              <MessageCircle className="w-4 h-4 mr-3" />
+              <MessageCircle className="w-4 h-4 mr-3 transition-transform duration-300 group-hover:scale-110" />
               <span className="text-sm font-medium">Ask a question</span>
             </div>
-            <span className="text-gray-400">›</span>
+            <ArrowRight className="w-4 h-4 text-gray-400 transition-transform duration-300 hover:translate-x-1" />
           </button>
         </div>
 
@@ -44,13 +56,13 @@ const WelcomeScreenWidget: React.FC<WelcomeScreenWidgetProps> = ({ onStartChat }
         <div className="flex space-x-2 mb-6">
           <button 
             onClick={() => onStartChat('Track my order')}
-            className="flex-1 bg-transparent border border-gray-600 hover:border-gray-400 text-white text-xs py-2.5 px-3 rounded-lg transition-all duration-300 hover:bg-gray-800/30 hover:scale-[1.02]"
+            className="flex-1 bg-transparent border border-gray-600 hover:border-gray-400 text-white text-xs py-2.5 px-3 rounded-lg transition-all duration-300 hover:bg-gray-800/30 hover:scale-[1.02] hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-gray-400/50"
           >
             Track my order
           </button>
           <button 
             onClick={() => onStartChat('Show me new arrivals')}
-            className="flex-1 bg-transparent border border-gray-600 hover:border-gray-400 text-white text-xs py-2.5 px-3 rounded-lg transition-all duration-300 hover:bg-gray-800/30 hover:scale-[1.02]"
+            className="flex-1 bg-transparent border border-gray-600 hover:border-gray-400 text-white text-xs py-2.5 px-3 rounded-lg transition-all duration-300 hover:bg-gray-800/30 hover:scale-[1.02] hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-gray-400/50"
           >
             New arrivals
           </button>
@@ -59,39 +71,42 @@ const WelcomeScreenWidget: React.FC<WelcomeScreenWidgetProps> = ({ onStartChat }
         {/* Recent Conversation */}
         <div className="mb-6">
           <h3 className="text-white text-sm font-medium mb-3">Recent Conversation</h3>
-          <div className="bg-gray-800/50 border border-gray-700 hover:border-gray-500 rounded-lg p-3 hover:bg-gray-800/70 transition-all duration-300 cursor-pointer hover:scale-[1.01]">
+          <button
+            onClick={handleRecentConversation}
+            className="w-full bg-gray-800/50 border border-gray-700 hover:border-gray-500 rounded-lg p-3 hover:bg-gray-800/70 transition-all duration-300 cursor-pointer hover:scale-[1.01] hover:shadow-lg hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-gray-400/50"
+          >
             <div className="flex items-center justify-between">
-              <div className="flex-1">
+              <div className="flex-1 text-left">
                 <p className="text-gray-300 text-xs mb-1">Hi, I am Wakao ai virtual assistant, ho...</p>
                 <p className="text-gray-500 text-xs">an hour ago</p>
               </div>
-              <span className="text-gray-400 ml-2">›</span>
+              <ArrowRight className="w-4 h-4 text-gray-400 ml-2 transition-transform duration-300 hover:translate-x-1" />
             </div>
-          </div>
+          </button>
         </div>
 
         {/* Additional Action Buttons */}
         <div className="space-y-3">
           <button
-            onClick={() => onStartChat('Start a live call')}
-            className="w-full bg-transparent border border-gray-600 hover:border-gray-400 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/30 hover:scale-[1.02] hover:shadow-lg"
+            onClick={handleLiveCall}
+            className="w-full bg-transparent border border-gray-600 hover:border-gray-400 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/30 hover:scale-[1.02] hover:shadow-lg hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-gray-400/50 group"
           >
             <div className="flex items-center">
-              <Phone className="w-4 h-4 mr-3" />
+              <Phone className="w-4 h-4 mr-3 transition-transform duration-300 group-hover:scale-110" />
               <span className="text-sm font-medium">Start a live call</span>
             </div>
-            <span className="text-gray-400">›</span>
+            <ArrowRight className="w-4 h-4 text-gray-400 transition-transform duration-300 group-hover:translate-x-1" />
           </button>
 
           <button
-            onClick={() => onStartChat('Talk to a human agent')}
-            className="w-full bg-transparent border border-gray-600 hover:border-gray-400 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/30 hover:scale-[1.02] hover:shadow-lg"
+            onClick={handleHumanAgent}
+            className="w-full bg-transparent border border-gray-600 hover:border-gray-400 text-white p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:bg-gray-800/30 hover:scale-[1.02] hover:shadow-lg hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-gray-400/50 group"
           >
             <div className="flex items-center">
-              <User className="w-4 h-4 mr-3" />
+              <User className="w-4 h-4 mr-3 transition-transform duration-300 group-hover:scale-110" />
               <span className="text-sm font-medium">Talk to a human agent</span>
             </div>
-            <span className="text-gray-400">›</span>
+            <ArrowRight className="w-4 h-4 text-gray-400 transition-transform duration-300 group-hover:translate-x-1" />
           </button>
         </div>
       </div>
